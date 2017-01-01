@@ -1,0 +1,22 @@
+{
+  "name": "webpeck2-step-by-step",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "http-server": "0.9.0",
+    "webpack": "2.1.0-beta.28",
+    "webpack-dev-server": "2.1.0-beta.12"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack-dev-server --no-info",
+    "dev:info": "webpack-dev-server",
+    "build": "webpack",
+    "server": "http-server server -p 8080"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

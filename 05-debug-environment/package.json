@@ -1,0 +1,29 @@
+{
+  "name": "webpeck2-step-by-step",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "html-webpack-plugin": "2.25.0",
+    "http-server": "0.9.0",
+    "progress-bar-webpack-plugin": "1.9.1",
+    "rimraf": "2.5.4",
+    "webpack": "2.1.0-beta.28",
+    "webpack-dev-server": "2.1.0-beta.12"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack-dev-server --no-info",
+    "dev:info": "webpack-dev-server",
+    "dev:console.log": "CONSOLE_LOG=true webpack-dev-server --no-info",
+    "predev": "rimraf dist",
+    "build": "webpack",
+    "prebuild": "rimraf dist",
+    "server": "http-server dist -p 8080",
+    "debug": "node-nightly --inspect --debug-brk node_modules/.bin/webpack --env.debug"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
