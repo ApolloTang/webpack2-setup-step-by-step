@@ -16,7 +16,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --no-info",
     "dev:info": "webpack-dev-server",
-    "dev:console.log": "CONSOLE_LOG=true webpack-dev-server --no-info",
+    "dev:console.log": "CONSOLE_LOG=true webpack-dev-server --env.dev --no-info --define process.env.CONSOLE_LOG='true'",
     "predev": "rimraf dist",
     "build": "webpack",
     "prebuild": "rimraf dist",

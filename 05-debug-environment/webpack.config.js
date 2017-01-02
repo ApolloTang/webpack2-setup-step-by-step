@@ -21,15 +21,11 @@ const config_fn = env => {                        // [6]
             host: webpackDevServer_host,
             port: webpackDevServer_port
         },
-        performance: {
-            hints: false                         // [7]
-        },
         context: absolutePath_sourceFolder,      // [2]
         entry: {
             main: './main.js'
         },
         output: {
-            pathinfo: true,                      // [8]
             path: absolutePath_buildFolder,      // [4]
             filename: 'bundle.js',
         },
@@ -39,7 +35,7 @@ const config_fn = env => {                        // [6]
                 favicon: './favicon.ico'
                 // inject: 'head',               // [5]
             }),
-            new ProgressBarPlugin()              // [10]
+            new ProgressBarPlugin()              // [7]
         ]
     };
 
@@ -61,10 +57,7 @@ module.exports = config_fn;
 //
 // [6] • npm script with --env.debug will result in env.debug=true.
 //
-// [7] • don't show optimization help.
+// [7] • show progress bar in terminal
 //
-// [8] • show path in bundle.js, useful for debug.
+// [8] • all default value of webpack configruation is logged.
 //
-// [9] • all default value of webpack configruation is logged.
-//
-// [10] • show progress bar in terminal
