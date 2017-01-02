@@ -16,9 +16,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --no-info",
     "dev:info": "webpack-dev-server",
-    "dev:console.log": "CONSOLE_LOG=true webpack-dev-server --env.dev --no-info --define process.env.CONSOLE_LOG='true'",
+    "dev:console.log": "CONSOLE_LOG=true webpack-dev-server --no-info --define process.env.CONSOLE_LOG='true'",
     "predev": "rimraf dist",
     "build": "webpack",
+    "build:console.log": "CONSOLE_LOG=true webpack --define process.env.CONSOLE_LOG='true'",
     "prebuild": "rimraf dist",
     "server": "http-server dist -p 8080",
     "debug": "node-nightly --inspect --debug-brk node_modules/.bin/webpack --env.debug"
