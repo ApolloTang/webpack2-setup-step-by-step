@@ -10,9 +10,23 @@ if (process && process.env && process.env.CONSOLE_LOG) {
     console.info('main.js: helper.doHeavyLifting(): ', helper.doHeavyLifting()); // eslint-disable-line no-console
 }
 
+
 // ================
 // 11-path-resolve
 // ================
 var elem_twitterImg = require('./modules/twitter');
 document.getElementById("app-container").appendChild(elem_twitterImg);
+
+
+// ================
+// 12-css-loader
+// ================
+require('./main.css');
+
+
+// ================
+// 15-build-hash
+// ================
+var change = 'change';
+
 

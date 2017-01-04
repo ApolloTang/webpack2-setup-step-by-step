@@ -68,7 +68,6 @@ const config_fn = env => {                        // [6]
             new HtmlWebpackPlugin({
                 template: './index.template.html',
                 favicon: './common/images/favicon.ico'  // [15]
-                // inject: 'head',               // [5]
             }),
             new ProgressBarPlugin(),             // [7]
             new webpack.optimize.CommonsChunkPlugin({

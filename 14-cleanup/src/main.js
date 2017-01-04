@@ -11,7 +11,7 @@ if (process && process.env && process.env.CONSOLE_LOG) {
 }
 
 // ================
-// 11-modules
+// 11-path-resolve
 // ================
 var elem_twitterImg = require('./modules/twitter');
 document.getElementById("app-container").appendChild(elem_twitterImg);
@@ -21,7 +21,5 @@ document.getElementById("app-container").appendChild(elem_twitterImg);
 // 12-css-loader
 // ================
 require('./main.css');
-
-var change = 'change again again';
 
 
