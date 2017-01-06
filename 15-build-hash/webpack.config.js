@@ -122,8 +122,6 @@ module.exports = config_fn;
 //
 //  [6] • npm script with --env.debug will result in env.debug=true.
 //
-//  [5] • To avoid flash of unstyle page, never inject into head.
-//
 //  [4] • Webpack bundle is saved to /path/to/project/server/dist/bundle.js
 //      • [!] must be absolute path
 //

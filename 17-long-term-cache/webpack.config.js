@@ -14,7 +14,7 @@ const absolutePath_nodeModules = pathResolve('node_modules');
 
 const info = process.env.CONSOLE_LOG;
 
-const config_fn = env => {                        // [6]
+const config_fn = env => {                                                  // [6]
     if ( info === 'true' || env && env.debug ) {
         console.log('absolutePath_sourceFolder: ', absolutePath_sourceFolder);
         console.log('absolutePath_buildFolder: ', absolutePath_buildFolder);
@@ -26,10 +26,10 @@ const config_fn = env => {                        // [6]
             port: webpackDevServer_port
         },
         performance: {
-            hints: (info === 'true')             // [11]
+            hints: (info === 'true')                                        // [11]
         },
-        context: absolutePath_sourceFolder,      // [2]
-        entry: {                                 // [9]
+        context: absolutePath_sourceFolder,                                 // [2]
+        entry: {                                                            // [9]
             vendor: [
                 './vendor/third-party-code.js'
             ],
@@ -39,25 +39,25 @@ const config_fn = env => {                        // [6]
             main: './main.js'
         },
         output: {
-            path: absolutePath_buildFolder,      // [4]
-            filename: 'bundle.[name].[chunkhash].js',        // [9]
+            path: absolutePath_buildFolder,                                 // [4]
+            filename: 'bundle.[name].[chunkhash].js',                       // [9][22]
         },
         resolve: {
-            modules: [                           // [16]
+            modules: [                                                      // [16]
                 absolutePath_sourceFolder,
                 absolutePath_nodeModules,
             ],
-            extensions: ['.js']                  // [17]
+            extensions: ['.js']                                             // [17]
         },
         module: {
             loaders: [
                 {
-                    test: /\.jpe?g$|\.ico$|\.gif$|\.png$|\.svg$/,    // [12]
-                    loader: 'file-loader?name=./imgs/[name].[hash].[ext]',  // [13]
+                    test: /\.jpe?g$|\.ico$|\.gif$|\.png$|\.svg$/,           // [12]
+                    loader: 'file-loader?name=./imgs/[name].[hash].[ext]',  // [13][21][23]
                 },
                 {
-                    test: /\.css$/,                                  // [18]
-                    loader: ExtractTextPlugin.extract({              // [19]
+                    test: /\.css$/,                                         // [18]
+                    loader: ExtractTextPlugin.extract({                     // [19]
                         fallbackLoader: 'style-loader',
                         loader: 'css-loader'
                     }),
@@ -68,23 +68,22 @@ const config_fn = env => {                        // [6]
         plugins: [
             new HtmlWebpackPlugin({
                 template: './index.template.html',
-                favicon: './common/images/favicon.ico'  // [15]
-                // inject: 'head',               // [5]
+                favicon: './common/images/favicon.ico'                       // [15]
             }),
-            new ProgressBarPlugin(),             // [7]
+            new ProgressBarPlugin(),                                         // [7]
             new webpack.optimize.CommonsChunkPlugin({
-                name: [
-                    'vendor', 'common',                 //[10]
-                    'manifest'                          //[21]
+                name: [                                                      // [10]
+                    'vendor', 'common',
+                    'manifest'                                               // [25]
                 ]
             }),
-            new ExtractTextPlugin('styles.[name].[chunkhash].css'), // [19]
-            new InlineManifestWebpackPlugin()           //[22]
+            new ExtractTextPlugin('styles.[name].[chunkhash].css'),          // [19][22]
+            new InlineManifestWebpackPlugin()                                // [26]
         ]
     };
 
     if ( info === 'true' || env && env.debug ) {
-        console.log('webpack.config: ', config)  // [8]
+        console.log('webpack.config: ', config)                              // [8]
     }
     return config;
 };
@@ -92,14 +91,21 @@ const config_fn = env => {                        // [6]
 module.exports = config_fn;
 
 
-// [22] • InlineManifestWebpackPlugin build a list of all module, and
+//
+// [26] • InlineManifestWebpackPlugin build a list of all module, and
 //        keeping track of all modules reference.
 //
-// [21] • from Kent's tutorial
+// [25] • Follow configutration in https://github.com/kentcdodds/es6-todomvc/blob/FEM/06.1-longterm-caching/webpack.config.babel.js
+//
+// [23] • Output of this loader is not directed to a bundle, thus can not use chunkhash.
+//
+// [22] • Include chunkhash (ie., bundle's hash) in output name.
+//
+// [21] • Include build hash in output name.
 //
 // [20] • Instantiate ExtractTextPlugin with output name.
 //
-// [19] • Pass loader configuration through ExtractTextPlugin
+// [19] • Pass loader configuration through ExtractTextPlugin.
 //
 // [18] • Match css file for css loader.
 //
@@ -120,19 +126,19 @@ module.exports = config_fn;
 // [10] • Specify the bundles vendor and common as common bundles
 //        thus, module in these bundles will only load once.
 //
-// [2] • Context of entry point;
-//     • [!] must be absolute path
+//  [9] • Each key in entry will map to the [name] placeholder in the value of output.filename
 //
-// [4] • Webpack bundle is saved to /path/to/project/server/dist/bundle.js
-//     • [!] must be absolute path
+//  [8] • all default value of webpack configruation is logged.
 //
-// [5] • To avoid flash of unstyle page, never inject into head.
+//  [7] • show progress bar in terminal
 //
-// [6] • npm script with --env.debug will result in env.debug=true.
+//  [6] • npm script with --env.debug will result in env.debug=true.
 //
-// [7] • show progress bar in terminal
+//  [5] • To avoid flash of unstyle page, never inject into head.
 //
-// [8] • all default value of webpack configruation is logged.
+//  [4] • Webpack bundle is saved to /path/to/project/server/dist/bundle.js
+//      • [!] must be absolute path
 //
-// [9] • Each key in entry will map to the [name] placeholder in the value of output.filename
+//  [2] • Context of entry point;
+//      • [!] must be absolute path
 //
