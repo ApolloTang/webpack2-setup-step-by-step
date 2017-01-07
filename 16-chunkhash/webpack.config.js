@@ -89,7 +89,7 @@ module.exports = config_fn;
 
 
 //
-// [23] • Output of this loader is not directed to a bundle, thus can not use chunkhash.
+// [23] • Output of this loader is not directed to a bundle, thus cannot use chunkhash.
 //
 // [22] • Include chunkhash (ie., bundle's hash) in output name.
 //
@@ -125,8 +125,6 @@ module.exports = config_fn;
 //  [7] • show progress bar in terminal
 //
 //  [6] • npm script with --env.debug will result in env.debug=true.
-//
-//  [5] • To avoid flash of unstyle page, never inject into head.
 //
 //  [4] • Webpack bundle is saved to /path/to/project/server/dist/bundle.js
 //      • [!] must be absolute path

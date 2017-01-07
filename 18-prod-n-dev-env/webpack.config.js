@@ -4,6 +4,8 @@ const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin');
+const {getIfUtils, removeEmpty} = require('webpack-config-utils');
+
 
 const webpackDevServer_host = '0.0.0.0';
 const webpackDevServer_port = 8080;
@@ -15,6 +17,8 @@ const absolutePath_nodeModules = pathResolve('node_modules');
 const info = process.env.CONSOLE_LOG;
 
 const config_fn = env => {                                                  // [6]
+    const {ifProd, ifNotProd} = getIfUtils(env);                            // [27]
+
     if ( info === 'true' || env && env.debug ) {
         console.log('absolutePath_sourceFolder: ', absolutePath_sourceFolder);
         console.log('absolutePath_buildFolder: ', absolutePath_buildFolder);
@@ -40,46 +44,67 @@ const config_fn = env => {                                                  // [
         },
         output: {
             path: absolutePath_buildFolder,                                 // [4]
-            filename: 'bundle.[name].[chunkhash].js',                       // [9][22]
+            filename: ifProd(
+                'bundle.[name].[chunkhash].js',                             // [9][22]
+                'bundle.[name].[hash]js'                                    // [28]
+            )
         },
         resolve: {
             modules: [                                                      // [16]
                 absolutePath_sourceFolder,
-                absolutePath_nodeModules,
+                absolutePath_nodeModules
             ],
             extensions: ['.js']                                             // [17]
         },
         module: {
-            loaders: [
+            loaders: removeEmpty([                                          // [29]
                 {
                     test: /\.jpe?g$|\.ico$|\.gif$|\.png$|\.svg$/,           // [12]
                     loader: 'file-loader?name=./imgs/[name].[hash].[ext]',  // [13][21][23]
                 },
-                {
-                    test: /\.css$/,                                         // [18]
-                    loader: ExtractTextPlugin.extract({                     // [19]
-                        fallbackLoader: 'style-loader',
-                        loader: 'css-loader'
-                    }),
-                    include: absolutePath_sourceFolder
-                }
-            ]
+                ifProd(
+                    {
+                        test: /\.css$/,                                     // [18]
+                        loader: ExtractTextPlugin.extract({                 // [19]
+                            fallbackLoader: 'style-loader',
+                            loader: 'css-loader'
+                        }),
+                        include: absolutePath_sourceFolder
+                    },
+                    {
+                        test: /\.css$/,                                     // [30]
+                        loader: 'style-loader!css-loader',
+                        include: absolutePath_sourceFolder
+                    }
+                )
+            ])
         },
-        plugins: [
+        plugins: removeEmpty([                                               // [29]
             new HtmlWebpackPlugin({
                 template: './index.template.html',
                 favicon: './common/images/favicon.ico'                       // [15]
             }),
             new ProgressBarPlugin(),                                         // [7]
-            new webpack.optimize.CommonsChunkPlugin({
-                name: [                                                      // [10]
-                    'vendor', 'common',
-                    'manifest'                                               // [25]
-                ]
-            }),
-            new ExtractTextPlugin('styles.[name].[chunkhash].css'),          // [19][22]
-            new InlineManifestWebpackPlugin()                                // [26]
-        ]
+            ifProd(
+                new webpack.optimize.CommonsChunkPlugin({
+                    name: [                                                  // [10]
+                        'vendor', 'common',
+                        'manifest'                                           // [25]
+                    ]
+                }),
+                new webpack.optimize.CommonsChunkPlugin({
+                    name: [                                                  // [31]
+                        'vendor', 'common'
+                    ]
+                })
+            ),
+            ifProd(
+                new ExtractTextPlugin('styles.[name].[chunkhash].css')       // [19][22][30]
+            ),
+            ifProd(
+                new InlineManifestWebpackPlugin()                            // [31]
+            )
+        ])
     };
 
     if ( info === 'true' || env && env.debug ) {
@@ -91,6 +116,20 @@ const config_fn = env => {                                                  // [
 module.exports = config_fn;
 
 
+//
+// [31] • Only keep track for manifest during production build,
+//        this speed up compiling for developement build.
+//
+// [30] • Only extract css into a separate bundle for pruduction build,
+//        this speed up compiling for developement build.
+//
+// [29] • Empty element in array is eliminate by removeEmpty()
+//
+// [28] • For development, every build with different content is a new build, that way
+//        browser always show the latest change.
+//
+// [27] • ifProd(A, B) is similar to (env.prod === true) ? A : B
+//      • ifNotProd(A, B) is similar to (env.prod !== true) ? A : B
 //
 // [26] • Use InlineManifestWebpackPlugin to avoid unnecessary chunkhash change.
 //
