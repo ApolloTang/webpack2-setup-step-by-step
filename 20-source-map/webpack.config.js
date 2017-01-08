@@ -117,7 +117,7 @@ const config_fn = env => {                                                  // [
 
 module.exports = config_fn;
 
-function getsourcemaptype (type) {                                           // [33]
+function getSourceMapType (type) {                                           // [33]
     const types = {
         'a': {
             // Shows uncompiled webpack source code during development mode (use this when debug webpack)
