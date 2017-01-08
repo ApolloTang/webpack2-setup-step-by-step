@@ -1,0 +1,8 @@
+/* +++++++++++++++++++++++++++++++++ css-file[start] modules/root/style.css */
+
+.module-style {
+    outline: red 1px solid;
+    height: 100px;
+}
+
+/* +++++++++++++++++++++++++++++++++ css-file[end] modules/root/style.css */
