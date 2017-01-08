@@ -9,7 +9,7 @@ const {getIfUtils, removeEmpty} = require('webpack-config-utils');
 
 const webpackDevServer_host = '0.0.0.0';
 const webpackDevServer_port = 8080;
-const sourceMapType = getSourceMapType('a');
+const sourceMapType = getSourceMapType('b');
 
 const absolutePath_sourceFolder = pathResolve('src');
 const absolutePath_buildFolder = pathResolve('dist');
@@ -117,20 +117,20 @@ const config_fn = env => {                                                  // [
 
 module.exports = config_fn;
 
-function getSourceMapType (type) {                                           // [33]
+function getsourcemaptype (type) {                                           // [33]
     const types = {
         'a': {
-            // Shows es5 source code during development mode
+            // Shows uncompiled webpack source code during development mode (use this when debug webpack)
             prod: 'source-map',     // production enviroment: source map in separate file
             dev:  'eval'            // non production env:    inline source map
         },
         'b': {
-            // Shows original code during development mode
+            // Shows original code during development mode (use this when debug application)
             prod: 'source-map',     // production enviroment: source map in separate file
             dev:  'eval-source-map' // non production env:    inline source map
         },
         'c': {
-        // Won't pause in debugger, and show no code
+            // Won't pause in debugger, and show no code (don't use this)
             prod: 'cheap-module-eval-source-map',     // production enviroment: source map in separate file
             dev:  'cheap-module-eval-source-map'      // non production env:    inline source map
         }
@@ -139,7 +139,7 @@ function getSourceMapType (type) {                                           // 
 }
 
 //
-// [33] • A function return various source map configuration
+// [33] • A function that return various source map configuration.
 //
 // [32] • Generate source map.
 //
