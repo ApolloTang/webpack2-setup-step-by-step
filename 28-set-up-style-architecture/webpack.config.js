@@ -36,12 +36,12 @@ const config_fn = env => {                                                  // [
         context: absolutePath_sourceFolder,                                 // [2]
         entry: {                                                            // [9]
             vendor: [
-                './vendor/third-party-code.js',
-                './vendor/oban'                                             // [39]
+                './vendor/third-party-code.js'//,
+                // './vendor/oban.less'                                        // [39]
             ],
             common: [
-                './util/helper.js',
-                './common/styles-init/index.less'                           // [40]
+                './util/helper.js'//,
+                // './common/styles-init/index.less'                           // [40]
             ],
             main: './main.js'
         },

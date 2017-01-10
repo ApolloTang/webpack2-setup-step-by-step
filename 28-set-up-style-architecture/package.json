@@ -31,7 +31,7 @@
     "dev:info": "webpack-dev-server --env.dev",
     "dev:console.log": "CONSOLE_LOG=true webpack-dev-server --env.dev --no-info --define process.env.CONSOLE_LOG='true'",
     "predev": "rimraf dist",
-    "build": "webpack --env.prod -p",
+    "build": "webpack --env.prod",
     "build:console.log": "CONSOLE_LOG=true webpack --env.prod --define process.env.CONSOLE_LOG='true' -p",
     "build:json": "webpack --env.prod --json > build-analytic.json",
     "prebuild": "rimraf dist",

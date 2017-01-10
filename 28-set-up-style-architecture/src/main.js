@@ -11,7 +11,7 @@ import thirdPartyCode from './vendor/third-party-code.js';
 console.log('thirdPartyCode.name: ', thirdPartyCode.name); // eslint-disable-line no-console
 
 const appContainer = document.getElementById("app-container");
-import {default as global_style} from './main.less';
+import global_style from './main.less';
 appContainer.className = 'appContainer';
 
 import root from './modules/root';

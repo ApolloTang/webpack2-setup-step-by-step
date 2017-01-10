@@ -3,7 +3,9 @@ if (process && process.env && process.env.CONSOLE_LOG) {
 }
 
 const root = document.createElement('div');
-import {default as style} from './style.less';
+import style from './style.less';
+// import {default as style} from './style.less';
+
 root.className = 'root '+style['module-style'];
 
 const btn = document.createElement("button");
