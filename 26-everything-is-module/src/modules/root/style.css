@@ -1,8 +1,11 @@
 /* +++++++++++++++++++++++++++++++++ css-file[start] modules/root/style.css */
 
 .module-style {
-    outline: red 1px solid;
-    height: 100px;
+    background: #c1c1c1;
+    height: 200px;
 }
 
-/* +++++++++++++++++++++++++++++++++ css-file[end] modules/root/style.css */
+.module-style .lazy-load-container {
+    height: 70px;
+}
+/* +++++++++++++++++++++++++++++++++ css-file[end]   modules/root/style.css */
