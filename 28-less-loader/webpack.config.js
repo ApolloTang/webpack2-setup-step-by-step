@@ -66,16 +66,16 @@ const config_fn = env => {                                                  // [
                 },
                 ifProd(
                     {
-                        test: /\.(less|css)$/,                              // [18][37]
+                        test: /\.css$/,                                     // [18]
                         loader: ExtractTextPlugin.extract({                 // [19]
                             fallbackLoader: 'style-loader',
-                            loader: 'css-loader?modules!less-loader'        // [36][38]
+                            loader: 'css-loader?'                           // [37]
                         }),
                         include: absolutePath_sourceFolder
                     },
                     {
-                        test: /\.(less|css)$/,                                 // [30][37]
-                        loader: 'style-loader!css-loader?modules!less-loader', // [36][38]
+                        test: /\.css$/,                                     // [30]
+                        loader: 'style-loader!css-loader',                  // [37]
                         include: absolutePath_sourceFolder
                     }
                 ),
@@ -146,11 +146,7 @@ function getSourceMapType (type) {                                           // 
 
 
 //
-// [38] • Added less loader to the loader pipe line.
-//
-// [37] • Match extension for either .less or .css.
-//
-// [36] • Modularized css.
+// [37] • Modularized css will be declared in their respective style file.
 //
 // [35] • Show modules name and path info as in bundles.
 //
