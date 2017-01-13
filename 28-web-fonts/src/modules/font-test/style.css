@@ -1,0 +1,8 @@
+/* +++++++++++++++++++++++++++++++++ css-file[start] modules/font-test/style.css */
+
+:local(.module-style) { background: #dfd};
+:local(.module-style) p { margin:0; padding:0;}
+:local(.module-style) .thin { font-family: 'RobotoThin'; }
+:local(.module-style) .light { font-family: 'RobotoLight'; }
+
+/* +++++++++++++++++++++++++++++++++ css-file[end]   modules/font-test/style.css */
