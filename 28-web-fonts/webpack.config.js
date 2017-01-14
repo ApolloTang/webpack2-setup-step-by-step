@@ -74,7 +74,7 @@ const config_fn = env => {                                                  // [
                         test: /\.css$/,                                     // [18]
                         loader: ExtractTextPlugin.extract({                 // [19]
                             fallbackLoader: 'style-loader',
-                            loader: 'css-loader?'                           // [37]
+                            loader: 'css-loader'                            // [37]
                         }),
                         include: absolutePath_sourceFolder
                     },

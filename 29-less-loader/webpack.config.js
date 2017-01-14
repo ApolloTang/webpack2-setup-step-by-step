@@ -56,7 +56,7 @@ const config_fn = env => {                                                  // [
                 absolutePath_sourceFolder,
                 absolutePath_nodeModules
             ],
-            extensions: ['.js', '.less', '.css']                            // [17][x]
+            extensions: ['.js', '.less', '.css']                            // [17][43]
         },
         module: {
             loaders: removeEmpty([                                          // [29]
@@ -71,16 +71,16 @@ const config_fn = env => {                                                  // [
                 },
                 ifProd(
                     {
-                        test: /\.(less|css)$/,                               // [18][x]
+                        test: /\.(less|css)$/,                               // [41]
                         loader: ExtractTextPlugin.extract({                  // [19]
                             fallbackLoader: 'style-loader',
-                            loader: 'css-loader!less-loader'                 // [37][x]
+                            loader: 'css-loader!less-loader'                 // [37][42]
                         }),
                         include: absolutePath_sourceFolder
                     },
                     {
-                        test: /\.(less|css$)/,                               // [30][x]
-                        loader: 'style-loader!css-loader!less-loader',       // [37][x]
+                        test: /\.(less|css$)/,                               // [30][41]
+                        loader: 'style-loader!css-loader!less-loader',       // [37][42]
                         include: absolutePath_sourceFolder
                     }
                 ),
@@ -150,6 +150,12 @@ function getSourceMapType (type) {                                           // 
 }
 
 
+//
+// [43] • no need to specify .less and .css extension when importing this file type.
+//
+// [42] • Added less loader to the loader pipe line.
+//
+// [41] • Match extension for either .less or .css.
 //
 // [40] • Don't want to include svg in font under '/imgs/'.
 //
