@@ -5,7 +5,7 @@ if (process && process.env && process.env.CONSOLE_LOG) {
 const elem_img = document.createElement("img");
 
 import {default as imgUri_twitter} from './img_01.png';
-import {default as style} from './style.css';
+import {default as style} from './style';
 
 elem_img.src = imgUri_twitter;
 elem_img.className = 'twitter ' + style['module-style'];

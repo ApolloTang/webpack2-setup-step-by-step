@@ -56,26 +56,31 @@ const config_fn = env => {                                                  // [
                 absolutePath_sourceFolder,
                 absolutePath_nodeModules
             ],
-            extensions: ['.js']                                             // [17]
+            extensions: ['.js', '.less', '.css']                            // [17][x]
         },
         module: {
             loaders: removeEmpty([                                          // [29]
                 {
                     test: /\.jpe?g$|\.ico$|\.gif$|\.png$|\.svg$/,           // [12]
                     loader: 'file-loader?name=./imgs/[name].[hash].[ext]',  // [13][21][23]
+                    exclude: pathResolve('src/common/fonts')                // [40]
+                },
+                {
+                    test: /\.(woff|woff2|ttf|eot|svg|otf)(\?v=[a-z0-9]\.[a-z0-9]\.[a-z0-9])?$/,  // [38]
+                    loader: 'file-loader?&name=fonts/[name].[ext]'                               // [39]
                 },
                 ifProd(
                     {
-                        test: /\.css$/,                                     // [18]
-                        loader: ExtractTextPlugin.extract({                 // [19]
+                        test: /\.(less|css)$/,                               // [18][x]
+                        loader: ExtractTextPlugin.extract({                  // [19]
                             fallbackLoader: 'style-loader',
-                            loader: 'css-loader?'                           // [37]
+                            loader: 'css-loader!less-loader'                 // [37][x]
                         }),
                         include: absolutePath_sourceFolder
                     },
                     {
-                        test: /\.css$/,                                     // [30]
-                        loader: 'style-loader!css-loader',                  // [37]
+                        test: /\.(less|css$)/,                               // [30][x]
+                        loader: 'style-loader!css-loader!less-loader',       // [37][x]
                         include: absolutePath_sourceFolder
                     }
                 ),
@@ -145,6 +150,12 @@ function getSourceMapType (type) {                                           // 
 }
 
 
+//
+// [40] • Don't want to include svg in font under '/imgs/'.
+//
+// [39] • Load fonts with file-loader and output them under '/fonts/' folder.
+//
+// [38] • Match fonts file extension.
 //
 // [37] • Modularized css will be declared in their respective style file.
 //

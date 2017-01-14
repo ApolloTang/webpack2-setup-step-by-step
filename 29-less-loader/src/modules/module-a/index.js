@@ -4,7 +4,7 @@ if (process && process.env && process.env.CONSOLE_LOG) {
 
 const elem_p = document.createElement('p');
 
-import style from './style.css';
+import style from './style';
 
 elem_p.innerHTML = 'module-a';
 elem_p.className = 'module-a ' + style['module-style'];

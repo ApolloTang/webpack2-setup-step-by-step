@@ -10,8 +10,10 @@ console.log('doHeavyLifting(): ', doHeavyLifting()); // eslint-disable-line no-c
 import thirdPartyCode from './vendor/third-party-code.js';
 console.log('thirdPartyCode.name: ', thirdPartyCode.name); // eslint-disable-line no-console
 
+import fonts from 'common/fonts';
+
 const appContainer = document.getElementById("app-container");
-import {default as global_style} from './main.css';
+import global_style from './main';
 appContainer.className = 'appContainer';
 
 import root from './modules/root';

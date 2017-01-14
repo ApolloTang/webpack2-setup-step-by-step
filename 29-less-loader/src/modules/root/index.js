@@ -3,7 +3,7 @@ if (process && process.env && process.env.CONSOLE_LOG) {
 }
 
 
-import style from './style.css';
+import style from './style';
 
 
 const root = document.createElement('div');
@@ -36,6 +36,9 @@ btn.addEventListener('click', () => {
 import moduleA from 'modules/module-a';
 root.appendChild(moduleA);
 
+
+import fontTest from 'modules/font-test';
+root.appendChild(fontTest);
 
 export default root;
 
