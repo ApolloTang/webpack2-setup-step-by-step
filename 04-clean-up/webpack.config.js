@@ -16,9 +16,7 @@ const config = {
         port: webpackDevServer_port
     },
     context: absolutePath_sourceFolder,      // [2]
-    entry: {
-        main: './main.js'
-    },
+    entry: './main.js',
     output: {
         path: absolutePath_buildFolder,      // [4]
         filename: 'bundle.js',

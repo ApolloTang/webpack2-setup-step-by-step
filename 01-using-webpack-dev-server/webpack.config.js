@@ -13,9 +13,7 @@ const config = {
         contentBase: absolutePath_serverFolder  // [1]
     },
     context: absolutePath_sourceFolder,         // [2]
-    entry: {
-        main: './main.js'
-    },
+    entry: './main.js',
     output: {
         publicPath: 'dist/',            // [3]
         filename: 'bundle.js',
