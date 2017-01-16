@@ -28,7 +28,7 @@ const config_fn = env => {                                                  // [
     const config = {
         devServer: {
             host: webpackDevServer_host,
-            port: webpackDevServer_port
+            port: webpackDevServer_port,
         },
         performance: {
             hints: (info === 'true')                                        // [11]
@@ -85,7 +85,7 @@ const config_fn = env => {                                                  // [
                     }
                 ),
                 {
-                    test: /\.js$/,                                           //[34]
+                    test: /\.jsx?$/,                                           //[34]
                     loaders: 'babel-loader',
                     exclude: /node_modules/
                 }
