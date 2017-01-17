@@ -28,7 +28,7 @@ const config_fn = env => {                                                  // [
     const config = {
         devServer: {
             host: webpackDevServer_host,
-            port: webpackDevServer_port,
+            port: webpackDevServer_port
         },
         performance: {
             hints: (info === 'true')                                        // [11]

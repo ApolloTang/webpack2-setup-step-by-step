@@ -15,9 +15,8 @@ import style from 'main.less';
 import fonts from 'common/fonts';
 
 
-const appContainer = document.getElementById("app-container");
+const appContainer = document.getElementById("app");
 import global_style from './main';
-appContainer.className = 'appContainer';
 
 
 import React from 'react';

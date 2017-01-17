@@ -1,5 +1,5 @@
 if (process && process.env && process.env.CONSOLE_LOG) {
-    console.info('log from file: src/modules/twitter/index.js'); // eslint-disable-line no-console
+    console.info('log from file: src/modules/twitter/index.jsx'); // eslint-disable-line no-console
 }
 
 import React, {Component} from 'react';
@@ -7,28 +7,19 @@ import React, {Component} from 'react';
 import style from './style';
 import imgUri_twitter from './img_01.png';
 
-class Twitter extends Component {
+class ModuleRoot extends Component {
     render() {
-        // console.log('xxx img: ', imgUri_twitter)
         return (
             <div className={`twitter ${style['module-style']}`} >
-                <img src={imgUri_twitter} ></img>
+                <img src={imgUri_twitter} />
             </div>
         )
     }
 };
 
-export default Twitter;
+export default ModuleRoot;
 
 
-
-// const elem_img = document.createElement("img");
-//
-// import {default as imgUri_twitter} from './img_01.png';
-// import {default as style} from './style';
-//
-// elem_img.src = imgUri_twitter;
-// elem_img.className = 'twitter ' + style['module-style'];
 
 
 

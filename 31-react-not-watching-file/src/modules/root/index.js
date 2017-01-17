@@ -3,10 +3,10 @@ if (process && process.env && process.env.CONSOLE_LOG) {
 }
 
 import React, {Component} from 'react';
+import ModuleA from 'modules/module-a';
+import FontTest from 'modules/font-test';
 
 import style from './style';
-
-import Twitter from 'modules/Twitter';
 class Root extends Component {
     constructor(props) {
         super(props);
@@ -15,7 +15,18 @@ class Root extends Component {
         }
     }
     handleClick_lazyLoad() {
-        this.setState({module_twitter:(<Twitter />)});
+        if (this.state.module_twitter === null) {
+            console.log('Lazy load modules/twitter...'); // eslint-disable-line no-console
+            System.import('modules/twitter').then(
+                ({default: Twitter}) => {
+                    console.log('Loaded modules is: ', Twitter); // eslint-disable-line no-console
+                    this.setState({module_twitter:(<Twitter />)});
+                },
+                err => {
+                    console.log('Loading module <Twitter/> fail') // eslint-disable-line no-console
+                }
+            );
+        }
     }
     render() {
         return(
@@ -25,6 +36,8 @@ class Root extends Component {
                 <div className="lazy-load-container">
                     { this.state.module_twitter ? this.state.module_twitter : null }
                 </div>
+                <ModuleA />
+                <FontTest />
             </div>
         )
     }
